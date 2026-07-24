@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+body {
+  margin: 0;
+  background: transparent;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#clock {
+  font-size: 42px;
+  font-weight: bold;
+}
+
+#date {
+  font-size: 16px;
+  margin-top: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="clock"></div>
+<div id="date"></div>
+
+<script>
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").innerHTML =
+    now.toLocaleTimeString("en-PH", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    });
+
+  document.getElementById("date").innerHTML =
+    now.toLocaleDateString("en-PH", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
