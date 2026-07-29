@@ -18,6 +18,10 @@ html,body{
     font-family:Arial,Helvetica,sans-serif;
 }
 
+body{
+    background:transparent;
+}
+
 /* Card */
 
 .clock-card{
@@ -37,7 +41,8 @@ html,body{
 
     text-align:center;
 
-    padding:18px;
+    padding:20px;
+
 }
 
 /* LIVE */
@@ -50,25 +55,25 @@ html,body{
 
     color:#ffc400;
 
-    font-size:clamp(13px,1.2vw,18px);
+    font-size:18px;
     font-weight:bold;
 
-    margin-bottom:14px;
+    margin-bottom:18px;
 
 }
 
-/* Live dot */
+/* Live Dot */
 
 .live-dot{
 
     width:10px;
     height:10px;
 
-    background:#35d07f;
+    background:#2ce46d;
 
     border-radius:50%;
 
-    box-shadow:0 0 8px #35d07f;
+    box-shadow:0 0 10px #2ce46d;
 
 }
 
@@ -78,11 +83,11 @@ html,body{
 
     color:#ffffff;
 
-    font-size:clamp(36px,4vw,58px);
+    font-size:60px;
 
     font-weight:700;
 
-    line-height:1.1;
+    line-height:1;
 
     white-space:nowrap;
 
@@ -94,7 +99,7 @@ html,body{
 
     color:#ffc400;
 
-    font-size:0.55em;
+    font-size:28px;
 
 }
 
@@ -102,13 +107,13 @@ html,body{
 
 .divider{
 
-    width:72%;
+    width:78%;
 
-    height:1px;
+    height:2px;
 
-    background:#49596b;
+    background:#46505b;
 
-    margin:16px 0;
+    margin:18px 0;
 
 }
 
@@ -117,35 +122,50 @@ html,body{
 .date-container{
 
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
 
-    gap:8px;
+    gap:12px;
 
 }
+
+/* Calendar */
 
 .calendar{
 
-    color:#ffc400;
-
-    font-size:clamp(14px,1.4vw,18px);
+    font-size:30px;
 
 }
+
+/* Date */
 
 .date{
 
     color:#ffffff;
 
-    font-size:clamp(13px,1.4vw,18px);
+    text-align:left;
 
-    font-weight:500;
+    line-height:1.3;
 
-    white-space:nowrap;
+}
+
+.weekday{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.full-date{
+
+    font-size:24px;
+
+    color:#d6d6d6;
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -153,22 +173,35 @@ html,body{
 <div class="clock-card">
 
     <div class="live-time">
+
         <span class="live-dot"></span>
+
         LIVE TIME
+
     </div>
 
     <div class="time" id="clock">
+
         00:00:00 <span>AM</span>
+
     </div>
 
     <div class="divider"></div>
 
     <div class="date-container">
 
-        <span class="calendar">📅</span>
+        <div class="calendar">📅</div>
 
-        <div class="date" id="date">
-            Loading...
+        <div class="date">
+
+            <div class="weekday" id="weekday">
+                Wednesday
+            </div>
+
+            <div class="full-date" id="fulldate">
+                July 29, 2026
+            </div>
+
         </div>
 
     </div>
@@ -195,16 +228,17 @@ function updateClock(){
     document.getElementById("clock").innerHTML =
         `${hours}:${minutes}:${seconds} <span>${ampm}</span>`;
 
-    const date = now.toLocaleDateString("en-PH",{
+    document.getElementById("weekday").textContent =
+        now.toLocaleDateString("en-PH",{
+            weekday:"long"
+        });
 
-        weekday:"long",
-        year:"numeric",
-        month:"long",
-        day:"numeric"
-
-    });
-
-    document.getElementById("date").textContent = date;
+    document.getElementById("fulldate").textContent =
+        now.toLocaleDateString("en-PH",{
+            month:"long",
+            day:"numeric",
+            year:"numeric"
+        });
 
 }
 
